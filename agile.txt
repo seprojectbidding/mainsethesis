@@ -1,0 +1,22 @@
+In our project which is Online Auction System, the Scrum framework can be applied suitably.
+Scrum is a framework within which people can address complex adaptive problems,
+while productively and creatively delivering products of the highest possible value.
+In this, small working teams are organized to "maximize communication, minimize overhead,
+and maximize the strength of sharing tacit and informal knowledge. Often thought of as an agile project management framework,
+Scrum describes a set of meetings, tools, and roles that work in concert to help teams structure and manage their work. 
+There are various prerequisites for choosing scrum. This employs a backlog in which there is a list of project requirements
+that provide buisness value. Items can be added anytime. This makes it customer friendly.
+The specifications are already taken care of in the functional requirements and the use cases, but if there are any additional
+features, they can always be added in the list of backlog.
+The heart of Scrum is a Sprint,
+a time-box of two weeks or one month during which a potentially releasable product increment is created. 
+A new Sprint starts immediately after the conclusion of the previous Sprint. 
+During this time, the backlog items that the sprint work units address are frozen. All the data from the use cases 
+are implemented here.
+Meetings are organized in which the modules of the system can be looked into. After the completion of every backlog,
+the next accomplishments of the backlog list is discussed. For example, after the completion of the login() module,
+a scrum meeting can be held.
+The Sprint Retrospective occurs after the Sprint Review and prior to the next Sprint Planning.
+In this meeting, the Scrum Team is to inspect itself and create a plan for improvements to be enacted during the subsequent Sprint.
+
+
