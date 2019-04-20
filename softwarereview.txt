@@ -8,6 +8,6 @@ should review our project-
 	3. Achieve technical work of more uniform, or at least more predictable, quality than can be
 	achieved without reviews, in order to make technical work more manageable.
 Reviewing the defect amplification will be the best way, because it not only tells us about the errors but
-also about the things that effected by the changes in our code and how adversely they get effected is also 
+also about the things that affected by the changes in our code and how adversely they get affected is also 
 important.
 Thus the best way to review our model would be the defect amplification.
