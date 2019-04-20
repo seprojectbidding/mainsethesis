@@ -1,0 +1,19 @@
+UI DESIGN (FACTORS):
+Design is very important for any project. In this project of online auction, 
+there are three golden rules which are followed to accomplish this.
+•	User in control:
+           If the project had to be exported commercially for a
+          particular user, then, as a designer, the goal is to simplify the
+           mode of interaction. Modes of interaction shouldn’t force a user 
+          into unnecessary or undesired actions. The interaction should be
+          flexible and straight forward. Since the project requires the customer to interact, 
+          the interactions should be undo-able.
+•	Reduced user’s memory load:
+          The project should remember pertinent user information and and assist the 
+          user with an interaction scenario.
+•	Consistent interface:
+          In this project, customers can buy, sell and bid products. This implies that 
+          the interface will acquire information in a consistent order. For example, module name mention in 
+          every screen display of the project
+
+
