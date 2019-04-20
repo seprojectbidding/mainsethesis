@@ -1,0 +1,24 @@
+In this project for the online auction system, we try to find  an appropriate architectural style,one which
+suits the requirements of this model. Now in our system, we want that as soon as user gets one item(i.e. buys 
+or bids on a particular item), then the details of the same should be visible as changes to the database as
+soon as possible and also visible to all the other potential buyers and the seller himself. For this 
+major requirement, we think that the data centered architectural style fits well as it is a blackboard mechanism 
+for each of the users(read customers) be it a buyer or a seller. Any one of them can update the value of the price
+of bid or purchase the item at once, at no time can two user buy the same at once which is exaclty what we need.
+
+Organization and Refinement-
+		Control-
+			In our particular module, the bidding module, the control hierarchy
+ exists as admin is at the top of the hierarchy and then it is followed by the buyer and then 
+the seller.It implies that the hierarchy looks somewhat like this-
+		accept the bid in the admin
+		  ^	
+		  |
+		check in database for availability
+		  ^  
+		  |
+		bid/buy 
+	Data- 
+		The communication of data is done through the blackboard echansim as stated in the above architectural 
+style.
+	
