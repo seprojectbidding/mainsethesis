@@ -1,0 +1,35 @@
+ACHIEVING SOFTWARE QUALITY:
+
+High quality of software is an important goal to be accomplished in the development of a new software 
+project. It is the result of good project management and solid software engineering practice. 
+Management and practice are applied within the context of four broad activities that help a software 
+team achieve high software quality: software engineering methods, project management techniques, 
+quality control actions, and software quality assurance.
+•	Software Engineering Method:
+                                           An effective software process applied in a manner
+that creates a useful product that provides measurable value for those who produce it
+and those who use it. An effective software process establishes the infrastructure that supports 
+any effort at building a high-quality software product. A useful product delivers the content,
+functions, and features that the end user desires, but as important, it delivers these assets 
+in a reliable, error-free way. There are many factors a software must abide to achieve software quality:
+      1.	Garvin’s Quality Dimensions: Our project of “The online auction system” abides by these dimensions
+                                  by following performance, feature, reliability, and conformance qualities.
+      2.	McCall’s Quality Factors: The auction system focuses on operational qualities, its ability to undergo
+                                  changes and to adapt to new environments. This is achieved by correctness, efficiency, 
+                                  usability and integrity. The interface can be specified to the needs of the user as per required.
+      3.	ISO 9126 Quality Factors: Our project identifies six key attributes of software, functionality, 
+                                  usability, efficiency, reliability, maintainability and portability.
+                                  The software is usable for a considerable amount of audience.
+      4.	Targeted Quality Factors: The interface layout of the project is conductive to easy understanding.
+                                  The operations such as logging in, getting the price of a particular article, etc.  
+                                  are easy to locate and initiate. The inputs are taken through the mouse clicks. 
+•	Project Management Techniques: 
+                                  This comprises of three parts, estimation decisions, scheduling decisions
+                                  and risk-oriented decisions. A particular date is set to deliver the project.
+                                  The tasks to be accomplished in the auction(project) are sequenced based on dependencies.
+•	Quality Control: 
+                                  It encompasses a set of software engineering actions that help to
+                                   ensure work meets quality goals. The code for the online auction system 
+                                  is reviewed and inspected to cover errors. A series of testing steps are applied.
+•	Quality Assurance:
+                                  In this, a set of auditing and reporting functions that assess the completeness of the project are encompassed.
