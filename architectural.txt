@@ -3,8 +3,16 @@ suits the requirements of this model. Now in our system, we want that as soon as
 or bids on a particular item), then the details of the same should be visible as changes to the database as
 soon as possible and also visible to all the other potential buyers and the seller himself. For this 
 major requirement, we think that the data centered architectural style fits well as it is a blackboard mechanism 
-for each of the users(read customers) be it a buyer or a seller. Any one of them can update the value of the price
-of bid or purchase the item at once, at no time can two user buy the same at once which is exaclty what we need.
+for each of the users(read customers) be it a buyer or a seller.
+Data Centered Architecture-
+A data store (e.g., a file or database) resides at the center of this architecture and is accessed frequently by 
+other components that update, add, delete, or otherwise modify data within the store. Figure 9.1 illustrates
+a typical data-centered style. Client software accesses a central repository.
+In some cases the data repository is passive. That is, client software accesses the data
+ independent of any changes to the data or the actions of other client software. 
+
+Any one of them can update the value of the price of bid or purchase the item at once, at no time can
+two user buy the same at once which is exaclty what we need.
 
 Organization and Refinement-
 		Control-
