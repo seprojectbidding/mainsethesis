@@ -1,0 +1,266 @@
+//1
+package com.example.auction.bidding.api;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Value;
+
+import java.time.Instant;
+import java.util.UUID;
+
+/**
+ * A bid value object.
+ */
+@Value
+public final class Bid {
+    /**
+     * The user that placed the bid.
+     */
+    private final UUID bidder;
+    /**
+     * The time that the bid was placed.
+     */
+    private final Instant bidTime;
+    /**
+     * The bid price.
+     */
+    private final int price;
+    /**
+     * The maximum bid price;
+     */
+    private final int maximumPrice;
+
+    @JsonCreator
+    // parameter annotations needed until https://github.com/lagom/lagom/issues/172 is fixed.
+    public Bid(@JsonProperty("bidder") UUID bidder, @JsonProperty("bidTime") Instant bidTime,
+            @JsonProperty("price") int price, @JsonProperty("maximumPrice") int maximumPrice) {
+        this.bidder = bidder;
+        this.bidTime = bidTime;
+        this.price = price;
+        this.maximumPrice = maximumPrice;
+    }
+}
+//2
+    
+package com.example.auction.bidding.api;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import lombok.Value;
+
+import java.time.Instant;
+import java.util.Optional;
+import java.util.UUID;
+
+/**
+ * A bid event.
+ */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", defaultImpl = Void.class)
+@JsonSubTypes({
+                @JsonSubTypes.Type(BidEvent.BidPlaced.class),
+                @JsonSubTypes.Type(BidEvent.BiddingFinished.class)
+})
+public interface BidEvent {
+
+    UUID getItemId();
+    /**
+     * A bid was placed.
+     */
+    @JsonTypeName("bid-placed")
+    @Value
+    final class BidPlaced implements BidEvent {
+
+        /**
+         * The item the bid was placed on.
+         */
+        private final UUID itemId;
+        /**
+         * The bid itself.
+         */
+        private final Bid bid;
+
+        @JsonCreator
+        public BidPlaced(UUID itemId, Bid bid) {
+            this.itemId = itemId;
+            this.bid = bid;
+        }
+    }
+
+    /**
+     * Bidding finished.
+     */
+    @JsonTypeName("bidding-finished")
+    @Value
+    final class BiddingFinished implements BidEvent {
+
+        /**
+         * The item that finished bidding.
+         */
+        private final UUID itemId;
+        /**
+         * The winning bid, if there was one.
+         */
+        private final Optional<Bid> winningBid;
+
+        @JsonCreator
+        public BiddingFinished(UUID itemId, Optional<Bid> winningBid) {
+            this.itemId = itemId;
+            this.winningBid = winningBid;
+        }
+    }
+
+}
+
+//3
+package com.example.auction.bidding.api;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Value;
+
+import java.util.UUID;
+
+/**
+ * The result of placing a bid.
+ */
+@Value
+public final class BidResult {
+    /**
+     * The current bid price.
+     */
+    private final int currentPrice;
+    /**
+     * The status of the result.
+     */
+    private final BidResultStatus status;
+    /**
+     * The current winning bidder.
+     */
+    private final UUID currentBidder;
+
+    @JsonCreator
+    public BidResult(int currentPrice, BidResultStatus status, UUID currentBidder) {
+        this.currentPrice = currentPrice;
+        this.status = status;
+        this.currentBidder = currentBidder;
+    }
+}
+//4
+package com.example.auction.bidding.api;
+
+/**
+ * The status of the result of placing a bid.
+ */
+public enum BidResultStatus {
+    /**
+     * The bid was accepted, and is the current highest bid.
+     */
+    ACCEPTED,
+    /**
+     * The bid was accepted, but was outbidded by the maximum bid of the current highest bidder.
+     */
+    ACCEPTED_OUTBID,
+    /**
+     * The bid was accepted, but is below the reserve.
+     */
+    ACCEPTED_BELOW_RESERVE,
+    /**
+     * The bid was not at least the current bid plus the increment.
+     */
+    TOO_LOW,
+    /**
+     * The auction hasn't started.
+     */
+    NOT_STARTED,
+    /**
+     * The auction has already finished.
+     */
+    FINISHED,
+    /**
+     * The auction has been cancelled.
+     */
+    CANCELLED
+}
+//5
+package com.example.auction.bidding.api;
+
+import static com.lightbend.lagom.javadsl.api.Service.named;
+import static com.lightbend.lagom.javadsl.api.Service.pathCall;
+import static com.lightbend.lagom.javadsl.api.Service.topic;
+
+import akka.NotUsed;
+import com.example.auction.security.SecurityHeaderFilter;
+import com.lightbend.lagom.javadsl.api.Descriptor;
+import com.lightbend.lagom.javadsl.api.Service;
+import com.lightbend.lagom.javadsl.api.ServiceCall;
+import com.lightbend.lagom.javadsl.api.broker.Topic;
+import com.lightbend.lagom.javadsl.api.deser.PathParamSerializers;
+import org.pcollections.PSequence;
+
+import java.util.UUID;
+
+/**
+ * The bidding services.
+ *
+ * This services manages all bids and lifecycle events associated with them.
+ *
+ * An auction is created when an AuctionStarted event is received, then bids can be placed, and when the end date
+ * specified in AuctionStarted is reached, this service will published a BiddingFinished event with the winning
+ * bidder (if there was one).
+ */
+public interface BiddingService extends Service {
+
+  String TOPIC_ID = "bidding-BidEvent";
+
+  /**
+   * A place a bid.
+   *
+   * @param itemId The item to bid on.
+   */
+  ServiceCall<PlaceBid, BidResult> placeBid(UUID itemId);
+
+  /**
+   * Get the bids for an item.
+   *
+   * @param itemId The item to get the bids for.
+   */
+  ServiceCall<NotUsed, PSequence<Bid>> getBids(UUID itemId);
+
+  /**
+   * The bid events topic.
+   */
+  Topic<BidEvent> bidEvents();
+
+  @Override
+  default Descriptor descriptor() {
+    return named("bidding").withCalls(
+            pathCall("/api/item/:id/bids", this::placeBid),
+            pathCall("/api/item/:id/bids", this::getBids)
+    ).withTopics(
+            topic(TOPIC_ID, this::bidEvents)
+    ).withPathParamSerializer(UUID.class, PathParamSerializers.required("UUID", UUID::fromString, UUID::toString))
+            .withHeaderFilter(SecurityHeaderFilter.INSTANCE);
+  }
+//6
+package com.example.auction.bidding.api;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Value;
+
+/**
+ * A request to place a bid.
+ */
+@Value
+public final class PlaceBid {
+
+    /**
+     * The maximum bid price.
+     */
+    private final int maximumBidPrice;
+
+    @JsonCreator
+    public PlaceBid(int maximumBidPrice) {
+        this.maximumBidPrice = maximumBidPrice;
+    }
+}
