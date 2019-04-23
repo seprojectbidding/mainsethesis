@@ -1,0 +1,23 @@
+Cocomo (Constructive Cost Model) is a regression model based on LOC, i.e number of Lines of Code.
+It is a procedural cost estimate model for software projects and often used as a process of reliably
+predicting the various parameters associated with making a project such as size, effort, cost, time 
+and quality.It was proposed by Barry Boehm in 1970 and is based on the study of 63 projects, 
+which make it one of the best-documented models.
+
+COCOMO for the project -
+	 The project, though not fully developed is estimated to have around 2000 LOC(Lines Of Codes).
+The project is to be completed by two people in two years as the deadline/max time allocated.This 
+comes out to be 48 person-months.The type of modelling that would suit the given case is assumed to be
+the organic model as the team size is relatively small and the team members have a normal experience
+regarding the problem.
+	We are delivering the basic COCOMO model as the details are still not completely figured out.
+Now, according to Boehm, the cost estimation of effort in a basic organic COCOMO model can be done by the
+formula -
+	   E= a(KLOC)^b
+	 where a and b are constants having the values, a=2.4 and b=1.05
+Therefore the estimated cost for the above project comes out to be,
+	   E=  4.969 rupees
+
+The effort is measured in Person-Months and as evident from the formula is dependent on Kilo-Lines of code.
+These formulas are used as such in the Basic Model calculations, as not much consideration of different factors
+such as reliability, expertise is taken into account, henceforth the estimate is rough
