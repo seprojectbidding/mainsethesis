@@ -10,18 +10,18 @@ Applying the white box testing to the Bidding module-
 diagram ,the sequence diagram , the level 2 dfd and the use cases.
 
 EXPLORING ALL THE POSSIBLE PATHS OF THE MODULE			-	EXPECTED OUTPUT			-	RESULT
-User enters the module but doesn't like anything and exits	-	no message displayed		-	Executed sucessfully
-User enters the module and bids on a specific item and exits	-	message depends on result	-	Executed sucessfully
-Bid is countered by a higher bid and the user loses		-	lost bid message 		-	Executed sucessfully
-User comes online and bids again rather than losing		-	bid completed message		-	Executed sucessfully
-User wins straightaway from the first bid itself		-	bid won message			-	Executed sucessfully
-User wins but exits from the third party payment app		-	payment failed message		-	Executed sucessfully
-User pays the money and gets the payment deducted		-	payment successful message	-	Executed sucessfully
+User enters the module but doesn't like anything and exits	-	no message displayed		-	Executed successfully
+User enters the module and bids on a specific item and exits	-	message depends on result	-	Executed successfully
+Bid is countered by a higher bid and the user loses		-	lost bid message 		-	Executed successfully
+User comes online and bids again rather than losing		-	bid completed message		-	Executed successfully
+User wins straightaway from the first bid itself		-	bid won message			-	Executed successfully
+User wins but exits from the third party payment app		-	payment failed message		-	Executed successfully
+User pays the money and gets the payment deducted		-	payment successful message	-	Executed successfully
 
 
 Above are all the possible paths the user can take in the given module.
 Each of these paths were checked and there is no error found in the specific module.
 			Test Cases	7
-		Sucessful Test Cases	7
-		Sucess %		100
+		Successful Test Cases	7
+		Success %		100
 The white box testing for the Bidding module has been completed...
