@@ -1,0 +1,42 @@
+Black-box testing, also called behavioral testing, focuses on the functional requirements
+of the software. That is, black-box testing techniques enable you to derive sets
+of input conditions that will fully exercise all functional requirements for a program.
+Black-box testing is not an alternative to white-box techniques. Rather, it is a complementary
+approach that is likely to uncover a different class of errors than whitebox
+methods.
+Black-box testing attempts to find errors in the following categories: 
+(1) incorrect or missing functions
+(2) interface errors
+(3) errors in data structures or external database access
+(4) behavior or performance errors
+(5) initialization and termination errors.
+Unlike white-box testing, which is performed early in the testing process, blackbox
+testing tends to be applied during later stages of testing. Because
+black-box testing purposely disregards control structure, attention is focused on the
+information domain.
+The type of black-box testing we are focusing is:
+-Equivalence Partitioning: It is a software test design technique that 
+ involves dividing input values into valid and invalid partitions and selecting 
+ representative values from each partition as test data.
+In our bidding module we can have many paths as already seen in the code along with the activity
+diagram ,the sequence diagram , the level 2 dfd and the use cases.
+
+              TEST CASES                     VARIABLE NAME                 EXPECTED OUTPUT                      RESULT
+        Char value in int                      price                        throw an error                  executed successfully 
+        int value in int                     maximumPrice                      no error                     executed successfully 
+        float value in int                     bidTime                      throw an error                  executed successfully 
+        int value in float                        bid                          no error                     executed successfully 
+        char value in float                       bid                       throw an error                  executed successfully 
+        float value in float                      bid                          no error                     executed successfully 
+        int value in char                       status                      throw an error                  executed successfully 
+        float value in char                     status                      throw an error                  executed successfully 
+        float value in char                     status                      throw an error                  executed successfully 
+Above are all the possible test cases are in the given module.
+Each of these paths were checked and there is no error found in the specific module.
+			Test Cases	9
+		Successful Test Cases	9
+		Success %		100
+The black box testing for the bidding module has been completed...
+
+
+
